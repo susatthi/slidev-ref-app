@@ -1,0 +1,20 @@
+{
+  "name": "slidev-flutter-ci",
+  "private": true,
+  "scripts": {
+    "build": "slidev build --base /slidev-flutter-ci/",
+    "dev": "slidev --open",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "@slidev/cli": "^0.31.2",
+    "@slidev/theme-apple-basic": "^0.20.0",
+    "@slidev/theme-default": "*",
+    "@slidev/theme-seriph": "*",
+    "slidev-theme-geist": "^0.8.1"
+  },
+  "devDependencies": {
+    "@iconify-json/ri": "^1.1.1",
+    "playwright-chromium": "^1.21.1"
+  }
+}
