@@ -1,8 +1,8 @@
 {
-  "name": "slidev-flutter-ci",
+  "name": "slidev-ref-app",
   "private": true,
   "scripts": {
-    "build": "slidev build --base /slidev-flutter-ci/",
+    "build": "slidev build --base /slidev-ref-app/",
     "dev": "slidev --open",
     "export": "slidev export"
   },
