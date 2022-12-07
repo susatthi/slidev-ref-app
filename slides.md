@@ -90,13 +90,13 @@ image: '/images/codewithandrea.png'
 
 <br>
 
-リファレンスアプリを作ろうとしたきっかけは 1 つの記事でした。
+リファレンスアプリを作ろうとしたのは 1 つの記事がきっかけでした。
 
 https://codewithandrea.com/articles/flutter-app-architecture-riverpod-introduction/
 
 それまでアーキテクチャは MVVM + Repository を採用していましたが、ぶっちゃけ雰囲気で書いてました。2022 年 3 月、たまたま見つけたこの記事を読んで衝撃を受けました。Riverpod を使ったアーキテクチャの正解にたどり着いた気がしたからです。
 
-そこで、当時話題になっていた [株式会社ゆめみの Flutter エンジニアコードチェック](https://github.com/yumemi-inc/flutter-engineer-codecheck) を題材にして、最適なアーキテクチャとは何か試してみることにしました。
+そこで、当時話題になっていた [株式会社ゆめみの Flutter エンジニアコードチェック](https://github.com/yumemi-inc/flutter-engineer-codecheck) を題材にして、Riverpod に最適なアーキテクチャとは何か試してみることにしました。
 
 ---
 
@@ -106,7 +106,7 @@ https://codewithandrea.com/articles/flutter-app-architecture-riverpod-introducti
 
 リファレンスアプリを作りはじめて 8 ヶ月が経ちました（延べ 420 時間使いました）。
 
-やってみたら、アーキテクチャはもちろん、Flutter アプリをリリースするために、あるいは Flutter で仕事をするための様々な実践的なスキルを学ぶことができました。加えて、2022 年 7 月から Flutter × Firebase の実務経験も積むことが出来ています。 
+やってみたら、アーキテクチャはもちろん、Flutter アプリをストアにリリースするための様々な実践的なスキルを学ぶことができました。加えて、2022 年 7 月から Flutter × Firebase の実務経験も積むことが出来ています。 
 
 <br>
 
@@ -114,7 +114,57 @@ https://codewithandrea.com/articles/flutter-app-architecture-riverpod-introducti
 
 - なぜリファレンスアプリを作ると良いか？
 - おすすめのリファレンスアプリの要件
-- どんな実践的スキルがが学べるのか
+- リファレンスアプリで学べる実践的なスキル
+
+---
+
+# 今日の話の位置づけ
+
+<br>
+
+## リリースサイクル
+
+<div grid="~ cols-5 gap-2">
+
+<p class="box" style="background-color: #42a5f5;">要件定義</p>
+<p class="box" style="background-color: #2196f3;">デザイン</p>
+<p class="box" style="background-color: #1e88e5;">コーディング</p>
+<p class="box" style="background-color: #1976d2;">テスト</p>
+<p class="box" style="background-color: #1565c0;">リリース</p>
+
+</div>
+
+<div grid="~ cols-4 gap-10" m="-t-4">
+
+<p></p>
+<p class="box2" style="background-color: #ff8f00;">今日の話</p>
+
+</div>
+
+<style>
+p.box {
+  color: white;
+  height: 100px;
+  text-align: center;
+  padding-top: 34px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 2px rgba(0,0,0,0.6);
+}
+p.box2 {
+  color: white;
+  height: 50px;
+  width: 400px;
+  text-align: center;
+  padding-top: 16px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 2px rgba(0,0,0,0.6);
+}
+</style>
+
+<div class="absolute bottom-5">
+  <p>何を作るか？ではなく、<b>どう作るか？</b> の話になります。</p>
+  <p>ほんの少しだけデザインフェーズとテストフェーズの話題もでます。</p>
+</div>
 
 ---
 layout: section
@@ -137,7 +187,7 @@ layout: section
 
 - 破壊的な変更が短時間で出来るように**十分に小さいアプリ**が望ましいです
 
-- 新しいアプリを作るときにリファレンスアプリのコードを**流用したり参考にします**
+- 新しいアプリを作るときにリファレンスアプリのコードを**流用したり参考にできます**
   - 「共同開発 10 スタンプラリー」は、私のリファレンスアプリの実装をベースにしました
 
 ---
@@ -147,16 +197,13 @@ layout: section
 <br>
 
 - ## 基本的で実践的なスキルがつきます
-### 座学ではなく実際に手を動かすから
-
-- ## 知識が定着します
-### 自分なりに考え、体現して、手を動かすから
+### 自分なりに考え、手を動かして、アウトプットするから
 
 - ## 技術記事を書くきっかけになります
-### アウトプットは重要です・・・
+### アウトプットは重要
 
 - ## 新しいアプリが速くリリース出来るようになります
-### リファレンスアプリのコードを参考にできるから
+### リファレンスアプリのコードを流用・参考にできるから
 
 ---
 
@@ -219,7 +266,7 @@ layout: section
   - TODO の一覧表示／検索
   - TODO の詳細表示
   - TODO の登録／編集／削除
-  - TODO を完了できる
+  - TODO の完了
   - 理由: CURD を実践できるから
 
 - お知らせ機能
@@ -257,7 +304,7 @@ layout: section
 
 # アーキテクチャ
 
-世の中には様々なアーキテクチャがあります。よさそうなアーキテクチャを自分なりに試してより理解を深めましょう。
+世の中には様々なアーキテクチャがあります。よさそうなアーキテクチャを自分なりに試してより理解を深めるとよいと思います。
 
 - MVC（Model-View-Controller）
 - MVP（Model-View-Presenter）
